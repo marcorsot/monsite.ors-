@@ -1,0 +1,77 @@
+from flask import Flask, render_template, request
+app = Flask(__name__)
+
+
+@app.route('/contact')
+def home():
+    return render_template('contact.html')
+
+@app.route('/submit', methods = ['POST'])
+def submit():
+    name = request.form.get('mame')
+    return f"merci , {name}, pour nous avoir contactés !"
+
+
+
+if __name__ =="__main__":
+    app.run(debug= True)
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Contact</title>
+</head>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<body>
+    <h1>Formulaire de contact</h1>
+    <form method="POST" action="/submit">
+        <label for="name">Nom :</label>
+        <input type="text" id="name" name="name">
+        <br><br>
+        <button type="submit">Envoyer</button>
+    </form>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <meta charset="UTF-8">
+    <title>accueil</title>
+</head>
+<body>
+    <h1>Bienvenue sur mon site web !</h1>
+    <p>ceci est ma premiere page avec flask.</p>
+
+</body>
+</html>
+
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <meta charset="UTF-8">
+    <title>À propos</title>
+</head>
+<body>
+    <h1>À propos de nous</h1>
+    <p>Voici une page pour parler de notre projet.</p>
+</body>
+</html>
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+
+h1 {
+    color: #333333;
+
+}
+
